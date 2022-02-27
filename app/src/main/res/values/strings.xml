@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">bitazza-test</string>
+    <string name="str_email">Email</string>
+    <string name="str_password">Password</string>
+    <string name="str_log_in">Log In</string>
+    <string name="str_market">Market</string>
+    <string name="str_wallet">Wallet</string>
+    <string name="str_volume">Volume</string>
+    <string name="str_price">Price</string>
+    <string name="str_change">Change</string>
+    <string name="str_loading">Loading...</string>
+    <string name="str_news">News</string>
+    <string name="str_activity">Activity</string>
+    <string name="str_settings">Settings</string>
+    <string name="str_logout">Log Out</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimen_space_small">5dp</dimen>
+    <dimen name="dimen_button">50dp</dimen>
+    <dimen name="dimen_bottom_nav_bar">75dp</dimen>
+    <dimen name="dimen_5">5dp</dimen>
+    <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_15">15dp</dimen>
+</resources>

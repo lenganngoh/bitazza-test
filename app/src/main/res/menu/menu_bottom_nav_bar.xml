@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_market"
+        android:title="@string/str_market"
+        android:icon="@drawable/ic_market"/>
+    <item
+        android:id="@+id/menu_wallet"
+        android:title="@string/str_wallet"
+        android:icon="@drawable/ic_wallet"/>
+    <item
+        android:id="@+id/menu_news"
+        android:title="@string/str_news"
+        android:icon="@drawable/ic_news"/>
+    <item
+        android:id="@+id/menu_activity"
+        android:title="@string/str_activity"
+        android:icon="@drawable/ic_activity"/>
+    <item
+        android:id="@+id/menu_settings"
+        android:title="@string/str_settings"
+        android:icon="@drawable/ic_settings"/>
+</menu>
