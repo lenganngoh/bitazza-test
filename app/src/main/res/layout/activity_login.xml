@@ -28,12 +28,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_space_small"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_email">
+        app:layout_constraintTop_toBottomOf="@id/til_email"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="@string/str_password" />
 
     </com.google.android.material.textfield.TextInputLayout>
