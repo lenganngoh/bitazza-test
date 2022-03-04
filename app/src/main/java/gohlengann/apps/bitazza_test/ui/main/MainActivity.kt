@@ -13,6 +13,9 @@ import gohlengann.apps.bitazza_test.databinding.ActivityMainBinding
 import gohlengann.apps.bitazza_test.ui.login.LoginActivity
 import gohlengann.apps.bitazza_test.ui.main.adapter.BottomNavigationFragmentViewPagerAdapter
 import gohlengann.apps.bitazza_test.ui.main.fragment.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -86,26 +89,20 @@ class MainActivity : AppCompatActivity() {
 
         vm.getAuthenticatedUser().observe(this) {
             cachedAuthenticatedUser = it
+            vm.cachedUser.value = it
             it?.let {
                 vm.openWebSocket()
             }
         }
 
-        vm.cachedInstruments.observe(this) {
+        vm.getLocalInstruments().observe(this) {
             it?.let {
                 marketFragment.updateInstrumentsAdapter(it.toMutableList())
             }
 
-            if (cachedAuthenticatedUser != null) {
-                var sessionNumber: Long = 2
-                it?.forEach { instrument ->
-                    vm.subscribe(
-                        cachedAuthenticatedUser!!.oms_id,
-                        sessionNumber,
-                        instrument.instrument_id
-                    )
-                    sessionNumber += 2
-                }
+            if (cachedAuthenticatedUser != null && !vm.isProductPolling) {
+                vm.startProductPoll(cachedAuthenticatedUser!!.oms_id)
+                vm.getLevel1Summary(cachedAuthenticatedUser!!.oms_id, "BTC")
             }
         }
 

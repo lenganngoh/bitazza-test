@@ -9,7 +9,7 @@ interface InstrumentDao {
     @Query("SELECT * FROM instrument")
     fun getLocalInstruments(): LiveData<List<Instrument>?>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertInstrument(instrument: Instrument)
 
     @Query("DELETE FROM instrument")

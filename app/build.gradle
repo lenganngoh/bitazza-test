@@ -35,13 +35,13 @@ android {
     productFlavors {
         dev {
             applicationId "gohlengann.apps.bitazza_test.dev"
-            buildConfigField "String", "API_BASE_URL", "\"https://apexapi.bitazza.com:8443/AP\""
+            buildConfigField "String", "API_BASE_URL", "\"https://apexapi.bitazza.com:8443/AP/\""
             buildConfigField "String", "SOCKET_BASE_URL", "\"wss://apexapi.bitazza.com/WSGateway\""
         }
 
         googlePlay {
             applicationId "gohlengann.apps.bitazza_test"
-            buildConfigField "String", "API_BASE_URL", "\"https://apexapi.bitazza.com:8443/AP\""
+            buildConfigField "String", "API_BASE_URL", "\"https://apexapi.bitazza.com:8443/AP/\""
             buildConfigField "String", "SOCKET_BASE_URL", "\"wss://apexapi.bitazza.com/WSGateway\""
             buildConfigField "boolean", "FORCE_UPDATE", "true"
             buildConfigField "boolean", "IS_PRODUCTION", "true"
@@ -98,6 +98,9 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "android.arch.persistence.room:compiler:1.1.1"
+
+    // Serialization
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.12.6"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

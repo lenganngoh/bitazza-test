@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import gohlengann.apps.bitazza_test.data.model.entity.Instrument
 import gohlengann.apps.bitazza_test.databinding.AdapterInstrumentBinding
+import java.text.NumberFormat
+import java.util.*
 
 class InstrumentRecyclerViewAdapter :
     RecyclerView.Adapter<InstrumentRecyclerViewAdapter.ViewHolder>() {
@@ -35,9 +37,11 @@ class InstrumentRecyclerViewAdapter :
         with(holder.binding) {
             val instrument = instruments[position]
             name = instrument.symbol
-            currentDayPxChange = String.format("%.2f", instrument.current_day_px_change) + "%"
-            lastTradedPx = String.format("฿%.2f", instrument.last_traded_px)
-            bestOffer = String.format("฿%.2f", instrument.best_offer)
+            val formatter = NumberFormat.getNumberInstance(Locale.getDefault())
+            currentDayPxChange = formatter.format(instrument.current_day_px_change) + "%"
+            lastTradedPx = String.format("฿%s", formatter.format(instrument.last_traded_px))
+            bestOffer = String.format("฿%s", formatter.format(instrument.best_offer))
+            volume = formatter.format(instrument.volume)
             flPercent.isActivated = instrument.current_day_px_change < 0
         }
     }

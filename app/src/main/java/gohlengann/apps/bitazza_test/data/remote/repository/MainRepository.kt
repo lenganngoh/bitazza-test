@@ -3,10 +3,13 @@ package gohlengann.apps.bitazza_test.data.remote.repository
 import com.google.gson.Gson
 import gohlengann.apps.bitazza_test.data.local.AuthenticatedUserDao
 import gohlengann.apps.bitazza_test.data.local.InstrumentDao
+import gohlengann.apps.bitazza_test.data.local.ProductDao
 import gohlengann.apps.bitazza_test.data.model.entity.Instrument
+import gohlengann.apps.bitazza_test.data.model.entity.Product
 import gohlengann.apps.bitazza_test.data.model.request.*
 import gohlengann.apps.bitazza_test.data.remote.Functions
 import gohlengann.apps.bitazza_test.data.remote.WSListener
+import gohlengann.apps.bitazza_test.data.remote.service.Level1SummaryService
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.WebSocket
@@ -17,7 +20,9 @@ class MainRepository @Inject constructor(
     private val request: Request,
     private val gson: Gson,
     private val authenticatedUserDao: AuthenticatedUserDao,
-    private val instrumentDao: InstrumentDao
+    private val instrumentDao: InstrumentDao,
+    private val productDao: ProductDao,
+    private val level1SummaryService: Level1SummaryService
 ) {
     private lateinit var listener: WSListener
 
@@ -114,14 +119,37 @@ class MainRepository @Inject constructor(
         )
     }
 
-    fun logout(webSocket: WebSocket) {
-        webSocket.send(gson.toJson(
-            MessageAction(
-                0,
-                0,
-                Functions.LOGOUT.function,
-                "{}"
+    fun getProducts(webSocket: WebSocket, omsId: Long) {
+        webSocket.send(
+            gson.toJson(
+                MessageAction(
+                    0,
+                    0,
+                    Functions.GET_PRODUCTS.function,
+                    gson.toJson(GetInstrumentRequest(omsId))
+                )
             )
-        ))
+        )
     }
+
+    fun getLocalProducts() = productDao.getLocalProducts()
+
+    fun insertProduct(product: Product) = productDao.insertProduct(product)
+
+    fun clearProducts() = productDao.clearProducts()
+
+    fun logout(webSocket: WebSocket) {
+        webSocket.send(
+            gson.toJson(
+                MessageAction(
+                    0,
+                    0,
+                    Functions.LOGOUT.function,
+                    "{}"
+                )
+            )
+        )
+    }
+
+    fun getLevel1Summary(omsId: Long, baseCurrency: String) = level1SummaryService.getLevel1Summary(omsId, baseCurrency)
 }
