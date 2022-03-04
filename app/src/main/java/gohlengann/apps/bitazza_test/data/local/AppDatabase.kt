@@ -8,7 +8,7 @@ import gohlengann.apps.bitazza_test.data.model.entity.AuthenticatedUser
 import gohlengann.apps.bitazza_test.data.model.entity.Instrument
 import gohlengann.apps.bitazza_test.data.model.entity.Product
 
-@Database(entities = [AuthenticatedUser::class, Instrument::class, Product::class], version = 1, exportSchema = false)
+@Database(entities = [AuthenticatedUser::class, Instrument::class, Product::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun authenticatedUserDao(): AuthenticatedUserDao
